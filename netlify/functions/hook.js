@@ -5,7 +5,7 @@ export const handler = async (event, context) => {
     const userAgent = eventParsed.multiValueHeaders["User-Agent"];
     const clientId = eventParsed.multiValueHeaders["X-Adobesign-Clientid"];
 
-    if (userAgent === "AdobeSign" && clientId === "UB7E5BXCXY") {
+    if (userAgent === "AdobeSign" && clientId === process.env.Client_Id) {
       return {
         statusCode: 200,
         body: JSON.stringify({
