@@ -10,9 +10,9 @@ export const handler = async (event, context) => {
   // if (clientid === "UB7E5BXCXY") {
     return {
       statusCode: 200,
-      body: JSON.stringify({
-        message: "SUCCESS",
-      }),
+      // body: JSON.stringify({
+      //   message: "SUCCESS"
+      // }),
       headers: { "X-AdobeSign-ClientId": clientid }
     }
   // }
