@@ -1,11 +1,13 @@
 export const handler = async (event, context) => {
+  event = JSON.parse(event);
   let body = JSON.parse(event.body);
 
   const userAgent = event.multiValueHeaders["User-Agent"];
   const clientId = event.multiValueHeaders["X-Adobesign-Clientid"];
   console.log(userAgent);
   console.log(clientId);
-  console.log(process.env.Client_Id + " - " + process.env.wh_name);
+  console.log(body.webhookName);
+
   console.log(event.httpMethod);
 
   if (userAgent === "AdobeSign" && clientId === process.env.Client_Id) {
