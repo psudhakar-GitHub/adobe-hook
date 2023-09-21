@@ -5,8 +5,6 @@ export const handler = async (event, context) => {
   const clientId = String(
     event.multiValueHeaders["X-Adobesign-Clientid"]
   ).trim();
-  console.log(userAgent);
-  console.log(clientId);
 
   if (userAgent === "AdobeSign" && clientId === process.env.Client_Id) {
     // webhook registration
@@ -30,8 +28,9 @@ export const handler = async (event, context) => {
             " by sender " +
             body.agreement.senderEmail +
             " on " +
-            String(body.agreement.createdDate).split("T")
+            String(body.agreement.createdDate).split("T")[0]
         );
+        console.log("Agreement id is " + body.agreement.id);
         return {
           statusCode: 200,
           headers: { "X-AdobeSign-ClientId": clientId },
