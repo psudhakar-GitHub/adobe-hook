@@ -1,11 +1,13 @@
 export const handler = async (event, context) => {
+  const userAgent = event.multiValueHeaders["User-Agent"];
+  const clientId = event.multiValueHeaders["X-Adobesign-Clientid"];
 
-  // webhook registration
-  if (event.httpMethod === "GET") {
-    const userAgent = eventParsed.multiValueHeaders["User-Agent"];
-    const clientId = eventParsed.multiValueHeaders["X-Adobesign-Clientid"];
+  let body = JSON.parse(event.body);
+  console.log(body);
 
-    if (userAgent === "AdobeSign" && clientId === process.env.Client_Id) {
+  if (userAgent === "AdobeSign" && clientId === process.env.Client_Id) {
+    // webhook registration
+    if (event.httpMethod === "GET") {
       return {
         statusCode: 200,
         body: JSON.stringify({
@@ -15,16 +17,17 @@ export const handler = async (event, context) => {
       };
     }
 
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        message: "FAILED!",
-      }),
-    };
-  }
-
-  // capture adobe events here
-  if (event.httpMethod === "POST") {
-    console.log(JSON.parse(event.body));
+    // capture adobe events here
+    if (event.httpMethod === "POST") {
+      if (body.webhookName === process.env.wh_name) {
+        return {
+          statusCode: 200,
+          body: JSON.stringify({
+            message: "SUCCESS",
+          }),
+          headers: { "X-AdobeSign-ClientId": clientId },
+        };
+      }
+    }
   }
 };
