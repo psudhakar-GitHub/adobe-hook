@@ -2,7 +2,8 @@ import fetch from "node-fetch";
 
 export const handler = async (event, context) => {
   var body = JSON.parse(event.body);
-
+  console.log(event);
+  
   // Fetch client id
   var clientid = body["X-AdobeSign-ClientId"];
   console.log(clientid);
