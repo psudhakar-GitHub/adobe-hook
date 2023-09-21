@@ -1,10 +1,7 @@
 export const handler = async (event, context) => {
-   
-   console.log(event.httpMethod);
-   var eventParsed = JSON.parse(event);
 
   // webhook registration
-  if (eventParsed.httpMethod === "GET") {
+  if (event.httpMethod === "GET") {
     const userAgent = eventParsed.multiValueHeaders["User-Agent"];
     const clientId = eventParsed.multiValueHeaders["X-Adobesign-Clientid"];
 
@@ -27,7 +24,7 @@ export const handler = async (event, context) => {
   }
 
   // capture adobe events here
-  if (eventParsed.httpMethod === "POST") {
-    console.log(eventParsed.body);
+  if (event.httpMethod === "POST") {
+    console.log(JSON.parse(event.body));
   }
 };
