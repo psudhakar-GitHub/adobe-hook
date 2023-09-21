@@ -1,9 +1,10 @@
 export const handler = async (event, context) => {
-  event = JSON.parse(event);
   let body = JSON.parse(event.body);
 
-  const userAgent = event.multiValueHeaders["User-Agent"];
-  const clientId = event.multiValueHeaders["X-Adobesign-Clientid"];
+  const userAgent = String(event.multiValueHeaders["User-Agent"]).trim();
+  const clientId = String(
+    event.multiValueHeaders["X-Adobesign-Clientid"]
+  ).trim();
   console.log(userAgent);
   console.log(clientId);
   console.log(body.webhookName);
