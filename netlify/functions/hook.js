@@ -13,7 +13,7 @@ export const handler = async (event, context) => {
       body: JSON.stringify({
         message: "SUCCESS",
       }),
-      headers: JSON.stringify({ "X-AdobeSign-ClientId": clientid }),
+      headers: { "X-AdobeSign-ClientId": clientid },
     };
   }
 
