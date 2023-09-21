@@ -1,5 +1,6 @@
 export const handler = async (event, context) => {
-   console.log(typeof event);
+   
+   console.log(event.body);
    var eventParsed = JSON.parse(event);
 
   // webhook registration
