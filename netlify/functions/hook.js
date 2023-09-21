@@ -1,9 +1,9 @@
 export const handler = async (event, context) => {
-  const userAgent = event.multiValueHeaders["User-Agent"];
-  const clientId = event.multiValueHeaders["X-Adobesign-Clientid"];
-
   let body = JSON.parse(event.body);
   console.log(body);
+
+  const userAgent = event.multiValueHeaders["User-Agent"];
+  const clientId = event.multiValueHeaders["X-Adobesign-Clientid"];
 
   if (userAgent === "AdobeSign" && clientId === process.env.Client_Id) {
     // webhook registration
