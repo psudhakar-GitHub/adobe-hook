@@ -7,14 +7,8 @@ export const handler = async (event, context) => {
   ).trim();
   console.log(userAgent);
   console.log(clientId);
-  console.log(body.webhookName);
 
-  console.log(event.httpMethod);
-
-  if (
-    userAgent === "[ AdobeSign ]" &&
-    clientId === `[ ${process.env.Client_Id} ]`
-  ) {
+  if (userAgent === "AdobeSign" && clientId === process.env.Client_Id) {
     // webhook registration
     if (event.httpMethod === "GET") {
       return {
